@@ -56,5 +56,5 @@ RUN xmlstarlet ed --inplace --ps --update '/configuration/midpoint/keystore/encr
 RUN xmlstarlet ed --inplace --ps --append '/configuration/midpoint/keystore/encryptionKeyAlias' --type elem --name xmlCipher --value 'http://www.w3.org/2001/04/xmlenc#aes256-cbc' /var/opt/midpoint/config.xml \
 && sed -i -e 's/\(<xmlCipher>\)/\n            \1/' /var/opt/midpoint/config.xml
 
-COPY docker-start.sh /
-CMD /docker-start.sh /bin/bash -l
+COPY docker-entry.sh /
+CMD /docker-entry.sh /bin/bash -l
