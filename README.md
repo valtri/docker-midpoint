@@ -1,11 +1,11 @@
-= Info =
+# Info
 
 Identity manager: midPoint 3.4.
 
-= Launch =
+# Launch
 
-docker run -itd --name midpoint midpoint
+    docker run -itd --name midpoint midpoint
 
-= Connect =
+# Connect
 
-docker exec midpoint  /bin/bash -l
+    docker exec midpoint /bin/bash -l
