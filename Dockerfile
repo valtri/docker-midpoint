@@ -1,5 +1,6 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
+
 ENV v 3.4
 
 WORKDIR /root
@@ -7,6 +8,7 @@ WORKDIR /root
 RUN apt-get update && apt-get install -y \
     apache2 \
     bzip2 \
+    libmysql-java \
     mc \
     openjdk-8-jdk \
     tomcat8 \
@@ -52,9 +54,8 @@ RUN wget -nv -P /var/opt/midpoint/icf-connectors http://nexus.evolveum.com/nexus
 # tuning
 RUN keytool -genseckey -alias strong -keystore /var/opt/midpoint/keystore.jceks -storetype jceks -storepass changeit -keyalg AES -keysize 256 -keypass midpoint \
 && chown tomcat8:tomcat8 /var/opt/midpoint/keystore.jceks
-RUN xmlstarlet ed --inplace --ps --update '/configuration/midpoint/keystore/encryptionKeyAlias' --value strong /var/opt/midpoint/config.xml
-RUN xmlstarlet ed --inplace --ps --append '/configuration/midpoint/keystore/encryptionKeyAlias' --type elem --name xmlCipher --value 'http://www.w3.org/2001/04/xmlenc#aes256-cbc' /var/opt/midpoint/config.xml \
-&& sed -i -e 's/\(<xmlCipher>\)/\n            \1/' /var/opt/midpoint/config.xml
+RUN xmlstarlet ed --inplace --update '/configuration/midpoint/keystore/encryptionKeyAlias' --value strong /var/opt/midpoint/config.xml
+RUN xmlstarlet ed --inplace --append '/configuration/midpoint/keystore/encryptionKeyAlias' --type elem --name xmlCipher --value 'http://www.w3.org/2001/04/xmlenc#aes256-cbc' /var/opt/midpoint/config.xml
 
 COPY docker-entry.sh /
 CMD /docker-entry.sh /bin/bash -l
