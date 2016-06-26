@@ -47,7 +47,8 @@ RUN a2enmod rewrite proxy proxy_http \
 RUN service apache2 start \
 && service tomcat8 start || : \
 && cp -vp midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
-&& while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done
+&& while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
+&& sleep 60
 RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
 RUN wget -nv -P /var/opt/midpoint/icf-connectors http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
 
