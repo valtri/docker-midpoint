@@ -44,8 +44,7 @@ RUN a2enmod rewrite proxy proxy_http \
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
-RUN service apache2 start \
-&& service tomcat8 start || : \
+RUN service tomcat8 start || : \
 && cp -vp /opt/midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60
