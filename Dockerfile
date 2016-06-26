@@ -52,11 +52,5 @@ RUN service apache2 start \
 RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
 RUN wget -nv -P /var/opt/midpoint/icf-connectors http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
 
-# tuning
-RUN keytool -genseckey -alias strong -keystore /var/opt/midpoint/keystore.jceks -storetype jceks -storepass changeit -keyalg AES -keysize 256 -keypass midpoint \
-&& chown tomcat8:tomcat8 /var/opt/midpoint/keystore.jceks
-RUN xmlstarlet ed --inplace --update '/configuration/midpoint/keystore/encryptionKeyAlias' --value strong /var/opt/midpoint/config.xml
-RUN xmlstarlet ed --inplace --append '/configuration/midpoint/keystore/encryptionKeyAlias' --type elem --name xmlCipher --value 'http://www.w3.org/2001/04/xmlenc#aes256-cbc' /var/opt/midpoint/config.xml
-
 COPY docker-entry.sh /
 CMD /docker-entry.sh /bin/bash -l
