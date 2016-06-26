@@ -32,8 +32,8 @@ RUN service tomcat8 stop
 
 # midpoint
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2
-RUN tar xjf midpoint-${v}-dist.tar.bz2
-RUN echo "alias repo-ninja='`pwd`/midpoint-${v}/bin/repo-ninja'" > /etc/profile.d/midpoint.sh
+RUN tar xjf midpoint-${v}-dist.tar.bz2 -C /opt
+RUN echo "alias repo-ninja='/opt/midpoint-${v}/bin/repo-ninja'" > /etc/profile.d/midpoint.sh
 
 # apache
 COPY midpoint.conf /etc/apache2/conf-available/
@@ -46,7 +46,7 @@ RUN a2enmod rewrite proxy proxy_http \
 # (tomcat8 startup is OK, but returns non-zero code)
 RUN service apache2 start \
 && service tomcat8 start || : \
-&& cp -vp midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
+&& cp -vp /opt/midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60
 RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
