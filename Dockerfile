@@ -31,8 +31,9 @@ RUN chown tomcat8:tomcat8 /var/opt/midpoint
 RUN service tomcat8 stop
 
 # midpoint
-RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2
-RUN tar xjf midpoint-${v}-dist.tar.bz2 -C /opt
+RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2 \
+&& tar xjf midpoint-${v}-dist.tar.bz2 -C /opt \
+&& rm -f midpoint-${v}-dist.tar.bz2
 RUN echo "alias repo-ninja='/opt/midpoint-${v}/bin/repo-ninja'" > /etc/profile.d/midpoint.sh
 
 # apache
