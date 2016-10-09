@@ -1,7 +1,7 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 3.4
+ENV v 3.4.1
 
 WORKDIR /root
 
