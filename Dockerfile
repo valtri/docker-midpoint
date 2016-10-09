@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libmysql-java \
     mc \
     openjdk-8-jdk \
-    tomcat8 \
+    tomcat8 libservlet3.1-java libcommons-dbcp-java libcommons-pool-java \
     wget \
     xmlstarlet \
 && rm -rf /var/lib/apt/lists/*
@@ -50,7 +50,7 @@ RUN service tomcat8 start || : \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60
 RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
-RUN wget -nv -P /var/opt/midpoint/icf-connectors http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
+RUN wget -nv -P /var/opt/midpoint/icf-connectors/ http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
 
 COPY docker-entry.sh /
 CMD /docker-entry.sh /bin/bash -l
