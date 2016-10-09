@@ -1,6 +1,6 @@
 # Info
 
-Identity manager: midPoint 3.4.
+Identity manager: midPoint 3.4.1.
 
 Homepage: [http://evolveum.com](http://evolveum.com)
 
