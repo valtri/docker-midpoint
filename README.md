@@ -1,6 +1,6 @@
 # Info
 
-Identity manager: midPoint 3.4.1.
+midPoint identity manager on Debian 9/stretch.
 
 Homepage: [http://evolveum.com](http://evolveum.com)
 
@@ -19,10 +19,16 @@ Parameters (replace the IP by real value):
 * User: **administrator**
 * Password: **5ecr3t**
 
-Where IP address may be obtained:
+The IP address may be obtained:
 
     docker inspect -f '{{.NetworkSettings.IPAddress}}' midpoint
 
 # Admin
 
     docker exec midpoint /bin/bash -l
+
+# Tags
+
+* **latest**: midPoint 3.4.1
+* **3.4**: midPoint 3.4
+* **3.3.1**: midPoint 3.3.1
