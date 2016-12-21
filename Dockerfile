@@ -24,7 +24,7 @@ RUN mkdir -p ~/.config/mc/ \
 && ln -s /usr/lib/mc/mc.sh /etc/profile.d/
 
 # tomcat
-RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx512m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/tomcat8
+RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/tomcat8
 RUN mkdir /var/opt/midpoint
 RUN chown tomcat8:tomcat8 /var/opt/midpoint
 RUN service tomcat8 stop
