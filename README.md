@@ -29,6 +29,7 @@ The IP address may be obtained:
 
 # Tags
 
-* **latest**: midPoint 3.4.1
+* **3.5**, **latest**: midPoint 3.5
+* **3.4.1**: midPoint 3.4.1
 * **3.4**: midPoint 3.4
 * **3.3.1**: midPoint 3.3.1
