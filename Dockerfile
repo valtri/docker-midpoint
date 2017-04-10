@@ -5,9 +5,13 @@ ENV v 3.5
 
 WORKDIR /root
 
+# graphviz - for GUI features
+# xlmstaret - for docker image scripts
+# tomcat8 additional packages - to prevent warnings
 RUN apt-get update && apt-get install -y \
     apache2 \
     bzip2 \
+    graphviz \
     libmysql-java \
     mc \
     openjdk-8-jdk \
