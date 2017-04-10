@@ -9,4 +9,5 @@ if grep -q 'encryptionKeyAlias.*default' /var/opt/midpoint/config.xml; then
 fi
 service apache2 start
 service tomcat8 start || :
+echo "(tomcat error message above may be ignored)"
 exec "$@"
