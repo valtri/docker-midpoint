@@ -33,7 +33,8 @@ RUN service tomcat8 stop
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2 \
 && tar xjf midpoint-${v}-dist.tar.bz2 -C /opt \
 && rm -f midpoint-${v}-dist.tar.bz2
-RUN echo "alias repo-ninja='/opt/midpoint-${v}/bin/repo-ninja'" > /etc/profile.d/midpoint.sh
+RUN sed -e "s,^\(BASEDIR\).*,\1=\"/opt/midpoint-${v}\"," /opt/midpoint-${v}/bin/repo-ninja > /usr/local/bin/repo-ninja \
+&& chmod +x /usr/local/bin/repo-ninja
 
 # apache
 COPY midpoint.conf /etc/apache2/conf-available/
