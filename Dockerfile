@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
 
 # mc (cosmetics)
 RUN mkdir -p ~/.config/mc/ \
+&& echo 'ENTRY "/var/lib/tomcat8/webapps/midpoint/WEB-INF" URL "/var/lib/tomcat8/webapps/midpoint/WEB-INF"' >> ~/.config/mc/hotlist \
 && echo 'ENTRY "/var/log/tomcat8" URL "/var/log/tomcat8"' >> ~/.config/mc/hotlist \
 && echo 'ENTRY "/var/opt/midpoint" URL "/var/opt/midpoint"' >> ~/.config/mc/hotlist \
 && ln -s /usr/lib/mc/mc.csh /etc/profile.d/ \
