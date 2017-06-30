@@ -3,13 +3,14 @@ MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
 ENV v 3.5.1
 
+EXPOSE 8009 8080
+
 WORKDIR /root
 
 # graphviz - for GUI features
 # xlmstaret - for docker image scripts
 # tomcat8 additional packages - to prevent warnings
 RUN apt-get update && apt-get install -y \
-    apache2 \
     bzip2 \
     graphviz \
     libmysql-java \
@@ -29,7 +30,8 @@ RUN mkdir -p ~/.config/mc/ \
 && ln -s /usr/lib/mc/mc.sh /etc/profile.d/
 
 # tomcat
-RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/tomcat8
+RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/tomcat8 \
+&& sed -i '/Service name="Catalina".*/a \\n    <Connector port="8009" protocol="AJP/1.3"/>' /etc/tomcat8/server.xml
 RUN mkdir /var/opt/midpoint
 RUN chown tomcat8:tomcat8 /var/opt/midpoint
 RUN service tomcat8 stop
@@ -40,13 +42,6 @@ RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar
 && rm -f midpoint-${v}-dist.tar.bz2
 RUN sed -e "s,^\(BASEDIR\).*,\1=\"/opt/midpoint-${v}\"," /opt/midpoint-${v}/bin/repo-ninja > /usr/local/bin/repo-ninja \
 && chmod +x /usr/local/bin/repo-ninja
-
-# apache
-COPY midpoint.conf /etc/apache2/conf-available/
-RUN a2enmod rewrite proxy proxy_http \
-&& a2dissite 000-default \
-&& a2enconf midpoint \
-&& service apache2 stop || :
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
