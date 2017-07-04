@@ -9,14 +9,14 @@ WORKDIR /root
 
 # graphviz - for GUI features
 # xlmstaret - for docker image scripts
-# tomcat8 additional packages - to prevent warnings
-RUN apt-get update && apt-get install -y \
+# tomcat8 additional packages (to prevent warnings), native package
+RUN apt-get update && apt-get install -y --no-install-recommends \
     bzip2 \
     graphviz \
     libmysql-java \
     mc \
     openjdk-8-jdk \
-    tomcat8 libservlet3.1-java libcommons-dbcp-java libcommons-pool-java \
+    tomcat8 libservlet3.1-java libcommons-dbcp-java libcommons-pool-java libtcnative-1 \
     wget \
     xmlstarlet \
 && rm -rf /var/lib/apt/lists/*
