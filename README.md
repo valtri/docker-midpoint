@@ -19,7 +19,8 @@ Launch:
 More advanced usage (separated data, directory with Oracle driver):
 
     mkdir midpoint-home/
-	#for RedHat: chcon -Rt svirt_sandbox_file_t midpoint-home/
+    chmod 0777 midpoint-home/
+    #for RedHat: chcon -Rt svirt_sandbox_file_t midpoint-home/
     
     docker run -itd --name midpoint -v `pwd`/midpoint-home:/var/opt/midpoint -v $ORACLE_HOME:$ORACLE_HOME:ro valtri/docker-midpoint
 
