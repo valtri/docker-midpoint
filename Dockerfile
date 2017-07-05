@@ -45,7 +45,7 @@ RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar
 # (tomcat8 startup is OK, but returns non-zero code)
 RUN service tomcat8 start || : \
 && cp -vp midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
-&& rm -rf midpoint-${v}/
+&& rm -rf midpoint-${v}/ \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60
 RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
