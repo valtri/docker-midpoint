@@ -47,7 +47,8 @@ The IP address may be obtained:
 
 # Tags
 
-* **3.5.1**, **latest**: midPoint 3.5.1
+* **3.6**, **latest**: midPoint 3.6
+* **3.5.1**: midPoint 3.5.1
 * **3.5**: midPoint 3.5
 * **3.4.1**: midPoint 3.4.1
 * **3.4**: midPoint 3.4
