@@ -1,7 +1,7 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 3.6
+ENV v 3.6.1
 
 EXPOSE 8009 8080
 
@@ -19,7 +19,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tomcat8 libservlet3.1-java libcommons-dbcp-java libcommons-pool-java libtcnative-1 \
     wget \
     xmlstarlet \
-    zip \
 && rm -rf /var/lib/apt/lists/*
 
 # mc (cosmetics)
@@ -41,14 +40,6 @@ RUN mkdir /var/opt/midpoint \
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2 \
 && tar xjf midpoint-${v}-dist.tar.bz2 \
 && rm -fv midpoint-${v}-dist.tar.bz2
-
-# workaround password expiration problem in midPoint 3.6
-RUN wget -nv https://raw.githubusercontent.com/Evolveum/midpoint/v3.6/config/initial-objects/010-value-policy.xml \
- && sed -i -e '/<expiration>/d' 010-value-policy.xml \
- && mkdir -p WEB-INF/classes/initial-objects/ \
- && mv -v 010-*.xml WEB-INF/classes/initial-objects/ \
- && zip -r midpoint-${v}/war/midpoint.war WEB-INF/ \
- && apt-get purge -y zip
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
