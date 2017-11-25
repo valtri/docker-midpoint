@@ -50,7 +50,5 @@ The IP address may be obtained:
 * **3.6.1**, **latest**: midPoint 3.6.1
 * **3.6**: midPoint 3.6
 * **3.5.1**: midPoint 3.5.1
-* **3.5**: midPoint 3.5
 * **3.4.1**: midPoint 3.4.1
-* **3.4**: midPoint 3.4
 * **3.3.1**: midPoint 3.3.1
