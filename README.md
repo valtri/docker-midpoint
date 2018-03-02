@@ -47,6 +47,7 @@ The IP address may be obtained:
 
 # Tags
 
+* **support-3.7**: midPoint 3.7.1-SNAPSHOT (support-3.7 branch)
 * **3.6.1**, **latest**: midPoint 3.6.1
 * **3.6**: midPoint 3.6
 * **3.5.1**: midPoint 3.5.1
