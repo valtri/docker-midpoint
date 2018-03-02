@@ -46,7 +46,7 @@ RUN service tomcat8 start || : \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60 \
 && service tomcat8 stop
-RUN ln -s /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
+RUN ln /usr/share/java/mysql-connector-java.jar /var/lib/tomcat8/lib/
 RUN wget -nv -P /var/opt/midpoint/icf-connectors/ http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
 
 RUN rm -fv /var/opt/midpoint/midpoint*.db /var/log/tomcat8/* \
