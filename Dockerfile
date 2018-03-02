@@ -1,7 +1,7 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 3.6.1
+ENV v support-3.7
 
 EXPOSE 8009 8080
 
@@ -37,15 +37,12 @@ RUN mkdir /var/opt/midpoint \
 && chown tomcat8:tomcat8 /var/opt/midpoint
 
 # midpoint
-RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2 \
-&& tar xjf midpoint-${v}-dist.tar.bz2 \
-&& rm -fv midpoint-${v}-dist.tar.bz2
+RUN wget -nv https://emian.zcu.cz/job/midPoint/job/midPoint/job/${v}/lastSuccessfulBuild/artifact/gui/admin-gui/target/midpoint.war
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
 RUN service tomcat8 start || : \
-&& cp -vp midpoint-${v}/war/midpoint.war /var/lib/tomcat8/webapps/ \
-&& rm -rf midpoint-${v}/ \
+&& mv -v midpoint.war /var/lib/tomcat8/webapps/ \
 && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
 && sleep 60 \
 && service tomcat8 stop
