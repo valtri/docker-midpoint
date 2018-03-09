@@ -11,7 +11,7 @@ WORKDIR /root
 # xlmstaret - for docker image scripts
 # tomcat8 additional packages (to prevent warnings), native package
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    bzip2 \
+    gzip \
     graphviz \
     libmysql-java \
     mc \
@@ -37,9 +37,9 @@ RUN mkdir /var/opt/midpoint \
 && chown tomcat8:tomcat8 /var/opt/midpoint
 
 # midpoint
-RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.bz2 \
-&& tar xjf midpoint-${v}-dist.tar.bz2 \
-&& rm -fv midpoint-${v}-dist.tar.bz2
+RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
+&& tar xzf midpoint-${v}-dist.tar.gz \
+&& rm -fv midpoint-${v}-dist.tar.gz
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
