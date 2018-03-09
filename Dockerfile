@@ -1,7 +1,7 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 3.6.1
+ENV v 3.7.1
 
 EXPOSE 8009 8080
 
