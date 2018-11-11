@@ -8,7 +8,7 @@ EXPOSE 8009 8080
 WORKDIR /root
 
 # graphviz - for GUI features
-# xlmstaret - for docker image scripts
+# xmlstarlet - for docker image scripts
 # tomcat8 additional packages (to prevent warnings), native package
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gzip \
