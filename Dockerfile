@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libmariadb-java \
     mc \
     openjdk-11-jre-headless \
-	procps \
+    procps \
     $tomcat libservlet3.1-java libcommons-dbcp-java libcommons-pool-java libtcnative-1 \
     wget \
     xmlstarlet \
