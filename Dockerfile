@@ -13,6 +13,7 @@ WORKDIR /root
 # xmlstarlet - for docker image scripts
 # procps - startup
 # tomcat additional packages (to prevent warnings), native package
+# zip - clearing war
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gzip \
     graphviz \
@@ -23,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     $tomcat libservlet3.1-java libcommons-dbcp-java libcommons-pool-java libtcnative-1 \
     wget \
     xmlstarlet \
+    zip \
  && rm -rf /var/lib/apt/lists/*
 
 # mc (cosmetics)
@@ -43,20 +45,20 @@ COPY tomcat.sh /
 #RUN : \
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
  && tar xzf midpoint-${v}-dist.tar.gz \
- && rm -fv midpoint-${v}-dist.tar.gz
+ && cp -vp midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
+ && zip -v -d /var/lib/${tomcat}/webapps/midpoint.war WEB-INF/lib-provided/\* \
+ && rm -rf midpoint-${v}-dist.tar.gz midpoint-${v}/
 RUN mkdir /var/opt/midpoint \
  && chown $tomcat_user:$tomcat_user /var/opt/midpoint
 
 # deployment
-RUN cp -vp midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
- && rm -rf midpoint-${v}/
 RUN ln -L /usr/share/java/mariadb-java-client.jar /var/lib/${tomcat}/lib/
 RUN /tomcat.sh & tomcat_pid=$? \
  && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
  && sleep 60 \
  && kill $tomcat_pid \
  && rm -fv /var/opt/midpoint/midpoint*.db /var/log/${tomcat}/* \
- && rm -rfv /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/work/Catalina/
+ && rm -rf /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/webapps/midpoint/ /var/lib/${tomcat}/work/Catalina/
 
 COPY docker-entry.sh /
 CMD /docker-entry.sh /tomcat.sh
