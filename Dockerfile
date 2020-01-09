@@ -39,7 +39,7 @@ RUN service tomcat8 stop \
 RUN mkdir /var/opt/midpoint \
  && chown ${tomcat_user}:${tomcat_user} /var/opt/midpoint
 
-ENV v 3.9
+ENV v 3.9.1
 
 # midpoint
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
