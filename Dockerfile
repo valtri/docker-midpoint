@@ -11,6 +11,7 @@ WORKDIR /root
 # graphviz - for GUI features
 # xmlstarlet - for docker image scripts
 # tomcat additional packages (to prevent warnings), native package
+# zip - clearing war
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gzip \
     graphviz \
@@ -20,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     $tomcat libservlet3.1-java libcommons-dbcp-java libcommons-pool-java libtcnative-1 \
     wget \
     xmlstarlet \
+    zip \
  && rm -rf /var/lib/apt/lists/*
 
 # mc (cosmetics)
@@ -38,10 +40,6 @@ RUN mkdir /var/opt/midpoint \
  && chown ${tomcat_user}:${tomcat_user} /var/opt/midpoint
 
 ENV v 3.9
-
-# zip - clearing war
-RUN apt-get update && apt-get install -y --no-install-recommends zip \
- && rm -rf /var/lib/apt/lists/*
 
 # midpoint
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
