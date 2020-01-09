@@ -47,10 +47,12 @@ The IP address may be obtained:
 
 # Tags
 
+* **4.0.1**, **latest**: midPoint 4.0.1
+* **4.0**: midPoint 4.0
+* **3.9.1**: midpoint 3.9.1
 * **3.9**: midpoint 3.9
 * **3.8**: midpoint 3.8
-* **3.7.2**, **latest**: midPoint 3.7.2
-* **3.7.1**: midPoint 3.7.1
+* **3.7.2**: midPoint 3.7.2
 * **3.6.1**: midPoint 3.6.1
 * **3.5.1**: midPoint 3.5.1
 * **3.4.1**: midPoint 3.4.1
