@@ -1,7 +1,6 @@
 FROM debian:stretch
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 3.9
 ENV tomcat tomcat8
 ENV tomcat_user tomcat8
 
@@ -37,6 +36,8 @@ RUN service tomcat8 stop \
  && sed -i '/Service name="Catalina".*/a \\n    <Connector port="8009" protocol="AJP/1.3"/>' /etc/${tomcat}/server.xml
 RUN mkdir /var/opt/midpoint \
  && chown ${tomcat_user}:${tomcat_user} /var/opt/midpoint
+
+ENV v 3.9
 
 # midpoint
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
