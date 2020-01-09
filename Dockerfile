@@ -39,24 +39,27 @@ RUN mkdir /var/opt/midpoint \
 
 ENV v 3.9
 
+# zip - clearing war
+RUN apt-get update && apt-get install -y --no-install-recommends zip \
+ && rm -rf /var/lib/apt/lists/*
+
 # midpoint
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
  && tar xzf midpoint-${v}-dist.tar.gz \
- && rm -fv midpoint-${v}-dist.tar.gz
+ && cp -vp midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
+ && zip -v -d /var/lib/${tomcat}/webapps/midpoint.war WEB-INF/lib-provided/\* \
+ && rm -rf midpoint-${v}-dist.tar.gz midpoint-${v}/
 
 # deployment
 # (tomcat8 startup is OK, but returns non-zero code)
 RUN service tomcat8 start || : \
- && cp -vp midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
- && rm -rf midpoint-${v}/ \
  && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
  && sleep 60 \
- && service tomcat8 stop
+ && service tomcat8 stop \
+ && rm -fv /var/opt/midpoint/midpoint*.db /var/log/${tomcat}/* \
+ && rm -rf /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/webapps/midpoint/ /var/lib/${tomcat}/work/Catalina/
 RUN ln -L /usr/share/java/mysql-connector-java.jar /var/lib/${tomcat}/lib/
 RUN wget -nv -P /var/opt/midpoint/icf-connectors/ http://nexus.evolveum.com/nexus/content/repositories/openicf-releases/org/forgerock/openicf/connectors/scriptedsql-connector/1.1.2.0.em3/scriptedsql-connector-1.1.2.0.em3.jar
-
-RUN rm -fv /var/opt/midpoint/midpoint*.db /var/log/${tomcat}/* \
- && rm -rfv /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/work/Catalina/
 
 COPY docker-entry.sh /
 CMD /docker-entry.sh /bin/bash -l
