@@ -1,7 +1,6 @@
 FROM debian:buster
 MAINTAINER František Dvořák <valtri@civ.zcu.cz>
 
-ENV v 4.0
 ENV tomcat tomcat9
 ENV tomcat_user tomcat
 
@@ -39,6 +38,8 @@ RUN mkdir -p ~/.config/mc/ \
 RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/${tomcat} \
  && sed -i '/Service name="Catalina".*/a \\n    <Connector port="8009" protocol="AJP/1.3"/>' /etc/${tomcat}/server.xml
 COPY tomcat.sh /
+
+ENV v 4.0
 
 # midpoint
 #COPY midpoint-${v}-dist.tar.gz .
