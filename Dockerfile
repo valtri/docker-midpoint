@@ -39,7 +39,7 @@ RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var
  && sed -i '/Service name="Catalina".*/a \\n    <Connector port="8009" protocol="AJP/1.3"/>' /etc/${tomcat}/server.xml
 COPY tomcat.sh /
 
-ENV v 4.0.1
+ENV v 4.0.2
 
 # midpoint
 #COPY midpoint-${v}-dist.tar.gz .
