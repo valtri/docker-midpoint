@@ -35,8 +35,7 @@ RUN mkdir -p ~/.config/mc/ \
  && ln -s /usr/lib/mc/mc.sh /etc/profile.d/
 
 # tomcat
-RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/${tomcat} \
- && sed -i '/Service name="Catalina".*/a \\n    <Connector port="8009" protocol="AJP/1.3"/>' /etc/${tomcat}/server.xml
+RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/${tomcat}
 COPY tomcat.sh /
 
 ENV v 4.0.2
@@ -52,14 +51,15 @@ RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar
 RUN mkdir /var/opt/midpoint \
  && chown $tomcat_user:$tomcat_user /var/opt/midpoint
 
-# deployment
+# deployment (server.xml modified later at the first launch)
 RUN ln -L /usr/share/java/mariadb-java-client.jar /var/lib/${tomcat}/lib/
 RUN /tomcat.sh & tomcat_pid=$? \
  && while ! test -f /var/opt/midpoint/config.xml; do sleep 0.5; done \
  && sleep 60 \
  && kill $tomcat_pid \
  && rm -fv /var/opt/midpoint/midpoint*.db /var/log/${tomcat}/* \
- && rm -rf /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/webapps/midpoint/ /var/lib/${tomcat}/work/Catalina/
+ && rm -rf /var/lib/${tomcat}/webapps/ROOT/ /var/lib/${tomcat}/webapps/midpoint/ /var/lib/${tomcat}/work/Catalina/ \
+ && touch /etc/${tomcat}/.docker-first-launch
 
 COPY docker-entry.sh /
 CMD /docker-entry.sh /tomcat.sh

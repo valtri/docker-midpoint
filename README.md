@@ -24,6 +24,10 @@ More advanced usage (separated data, directory with Oracle driver):
     
     docker run -itd --name midpoint -v `pwd`/midpoint-home:/var/opt/midpoint -v $ORACLE_HOME:$ORACLE_HOME:ro valtri/docker-midpoint
 
+# Parameters
+
+*AJP\_SECRET*: *secret* (or *secretRequired=false*) parameters for tomcat AJP connector (default: (empty))
+
 # Connect
 
 Web interface (replace the IP by real value):
