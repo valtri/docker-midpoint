@@ -45,7 +45,7 @@ ENV v 4.0.2
 #RUN : \
 RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
  && tar xzf midpoint-${v}-dist.tar.gz \
- && cp -vp midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
+ && install -v -m 0644 midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
  && zip -v -d /var/lib/${tomcat}/webapps/midpoint.war WEB-INF/lib-provided/\* \
  && rm -rf midpoint-${v}-dist.tar.gz midpoint-${v}/
 RUN mkdir /var/opt/midpoint \
