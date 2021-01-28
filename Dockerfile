@@ -1,5 +1,5 @@
 FROM debian:buster
-MAINTAINER František Dvořák <valtri@civ.zcu.cz>
+LABEL maintainer='František Dvořák <valtri@civ.zcu.cz>'
 
 ENV tomcat tomcat9
 ENV tomcat_user tomcat
