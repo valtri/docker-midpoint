@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 LABEL maintainer='František Dvořák <valtri@civ.zcu.cz>'
 
 ENV tomcat tomcat9
@@ -38,7 +38,7 @@ RUN mkdir -p ~/.config/mc/ \
 RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/${tomcat}
 COPY tomcat.sh /
 
-ENV v 4.2
+ENV v 4.3.1
 
 # midpoint
 #COPY midpoint-${v}-dist.tar.gz .

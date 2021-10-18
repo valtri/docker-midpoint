@@ -21,7 +21,7 @@ More advanced usage (separated data, directory with Oracle driver):
     mkdir midpoint-home/
     chmod 0777 midpoint-home/
     #for RedHat: chcon -Rt svirt_sandbox_file_t midpoint-home/
-    
+
     docker run -itd --name midpoint -v `pwd`/midpoint-home:/var/opt/midpoint -v $ORACLE_HOME:$ORACLE_HOME:ro valtri/docker-midpoint
 
 # Parameters
@@ -51,7 +51,8 @@ The IP address may be obtained:
 
 # Tags
 
-* **4.2**, **latest**: midPoint 4.2
+* **4.3.1**: midPoint 4.3.1
+* **4.2**: midPoint 4.2
 * **4.1**: midPoint 4.1
 * **4.0.x**: midPoint 4.0.3-SNAPSHOT
 * **4.0.2**: midPoint 4.0.2
