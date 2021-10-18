@@ -43,7 +43,7 @@ ENV v 4.4-RC1
 # midpoint
 #COPY midpoint-${v}-dist.tar.gz .
 #RUN : \
-RUN wget -nv https://evolveum.com/downloads/midpoint/${v}/midpoint-${v}-dist.tar.gz \
+RUN wget -nv https://nexus.evolveum.com/nexus/repository/releases/com/evolveum/midpoint/dist/${v}/dist-${v}-dist.tar.gz -O midpoint-${v}-dist.tar.gz \
  && tar xzf midpoint-${v}-dist.tar.gz \
  && install -v -m 0644 midpoint-${v}/lib/midpoint.war /var/lib/${tomcat}/webapps/ \
  && zip -v -d /var/lib/${tomcat}/webapps/midpoint.war WEB-INF/lib-provided/\* \
