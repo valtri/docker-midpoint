@@ -48,21 +48,3 @@ The IP address may be obtained:
 # Admin
 
     docker exec -it midpoint /bin/bash -l
-
-# Tags
-
-* **4.3.1**: midPoint 4.3.1
-* **4.2**: midPoint 4.2
-* **4.1**: midPoint 4.1
-* **4.0.x**: midPoint 4.0.3-SNAPSHOT
-* **4.0.2**: midPoint 4.0.2
-* **4.0.1**: midPoint 4.0.1
-* **4.0**: midPoint 4.0
-* **3.9.1**: midpoint 3.9.1
-* **3.9**: midpoint 3.9
-* **3.8**: midpoint 3.8
-* **3.7.2**: midPoint 3.7.2
-* **3.6.1**: midPoint 3.6.1
-* **3.5.1**: midPoint 3.5.1
-* **3.4.1**: midPoint 3.4.1
-* **3.3.1**: midPoint 3.3.1
