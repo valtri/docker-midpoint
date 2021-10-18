@@ -51,6 +51,7 @@ The IP address may be obtained:
 
 # Tags
 
+* **4.4-RC1**: midPoint 4.4 Release Candidate
 * **4.3.1**: midPoint 4.3.1
 * **4.2**: midPoint 4.2
 * **4.1**: midPoint 4.1
