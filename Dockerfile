@@ -38,7 +38,7 @@ RUN mkdir -p ~/.config/mc/ \
 RUN echo 'JAVA_OPTS="${JAVA_OPTS} -Xms256m -Xmx1024m -Xss1m -Dmidpoint.home=/var/opt/midpoint -Djavax.net.ssl.trustStore=/var/opt/midpoint/keystore.jceks -Djavax.net.ssl.trustStoreType=jceks"' >> /etc/default/${tomcat}
 COPY tomcat.sh /
 
-ENV v 4.4-RC1
+ENV v 4.4
 
 # midpoint
 #COPY midpoint-${v}-dist.tar.gz .
