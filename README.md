@@ -1,6 +1,6 @@
 # Info
 
-midPoint identity manager on Debian 10/buster.
+midPoint identity manager on Debian.
 
 Homepage: [http://evolveum.com](http://evolveum.com)
 
